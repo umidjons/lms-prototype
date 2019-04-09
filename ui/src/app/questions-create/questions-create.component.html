@@ -1,0 +1,27 @@
+<h2>New question</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label>
+      Question
+      <textarea formControlName="question" cols="30" rows="10"></textarea>
+    </label>
+  </div>
+
+  <div formArrayName="answers">
+    <label>Answers</label>
+    <button (click)="addAnswer()">New answer</button>
+
+    <div *ngFor="let answer of form.get('answers').controls; let i = index" [formGroupName]="i">
+      <label>
+        Answer #{{i + 1}}
+        <input formControlName="text">
+      </label>
+      <label>
+        <input type="checkbox" formControlName="isCorrect"> Is correct answer?
+      </label>
+    </div>
+  </div>
+
+  <button>Create</button>
+</form>
